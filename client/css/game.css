@@ -1,0 +1,184 @@
+.chatGame{
+    width: 100%;
+}
+
+.gameSpace{
+    width: 100%;
+    height: 500px;
+    margin-left: 20px;
+    /*background-color: blue;*/
+}
+
+.chatMsgGame{
+    width: 100%;
+    height: 350px;
+    overflow-y: auto;
+    
+}
+
+.chatSpace{
+    width: 100%;
+    height: 500px;
+}
+
+
+.pheaderGame{
+    margin-top: 10px;
+    font-family: 'Righteous', cursive;
+}
+
+
+/*
+.messageSpace{
+    display:inline-block;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+
+*/
+
+.btn{
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.playersTitle{
+    color: white;
+    font-weight: bold;
+}
+
+.usersSpace{
+    margin-bottom: 5px;
+}
+
+.playerSpace{
+    background-color: #66f;
+    color: white;
+}
+
+.balloonSettingsGame{
+    vertical-align: bottom;
+    margin-left: 30px;
+    border: 10px;
+}
+
+.gameControls{
+    /*display: inline;*/
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.gameMessage{
+    display:inline;
+    /*font-style: italic;*/
+    font-family: 'Courgette', cursive;
+}
+
+.gameBt1{
+    display: inline;
+}
+
+.gameBt2{
+    display: inline;
+}
+
+.playerName{
+    /*margin-top: 10px;*/
+    vertical-align: bottom;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.Player1{
+    position: fixed;
+    top: 10%;
+    margin-left: 76%;
+     box-shadow: 0px 0px 15px #000;
+     border-radius: 10px;
+     padding: 10px;
+     padding-bottom: 10px;
+     width: 200px;
+     background-color: #B13333;
+     color: white;
+}
+
+.Player2{
+    position: fixed;
+    top: 30%;
+    margin-left: 76%;
+     box-shadow: 0px 0px 15px #000;
+     border-radius: 10px;
+     padding: 10px;
+     padding-bottom: 10px;
+     width: 200px;
+     background-color: #335BB1;
+     color: white;
+}
+
+
+.Player1Name{
+    display: inline;
+    font-size: 120%;
+}
+
+.Player2Name{
+    display: inline;
+    font-size: 120%;
+}
+
+.playerSymbol{
+    display: inline;
+}
+
+.ps1{
+    position: fixed;
+    top: 10%;
+    margin-left: 74%;
+}
+
+.ps2{
+    position: fixed;
+    top: 30%;
+    margin-left: 74%;
+}
+
+
+.playerScores{
+    /*font-family: Georgia;*/
+    font-family: 'Covered By Your Grace', cursive;
+    font-size: 300%;
+    margin-left: 90px;
+}
+
+.currentPlayer{
+    font-size: 115%;
+    color: white;
+    font-weight: bold;
+}
+
+
+.gameScores{
+    box-shadow: 0px 0px 15px #000;
+}
+
+.gameWinner{
+    position: fixed;
+    top: 70%;
+    margin-left: 75%;
+    
+    box-shadow: 0px 0px 15px #000;
+    border-radius: 10px;
+     padding: 10px;
+     
+     width: 200px;
+     background-color: #3C8941;
+     color: white;
+     font-family: 'Gloria Hallelujah', cursive;
+}
+
+.scoresControl{
+    position: fixed;
+    top: 50%;
+    margin-left: 75%;
+}

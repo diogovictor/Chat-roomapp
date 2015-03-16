@@ -1,0 +1,128 @@
+<div class="container" >
+  <div class="pheaderGame">
+     <h1> {{gameTopic}} </h1>
+  </div>
+  
+    <div class="row chatGame">
+        <table width="100%">
+            <tr>
+                
+                <td width="40%">
+                    <div class="chatSpace">
+                        <div class="row">
+                          
+                          <table>
+                              <tr>
+                                  <td>
+                                      <div class="span2">
+                                      <ul class="nav nav-list well well-sm usersSpace">
+                                        <li class="nav-header">Local Users</li>
+                                        <li ng-repeat="user in roster" ng-bind="user">
+                                        </li>
+                                      </ul>
+                                  </div>
+                                  </td>
+                                  
+                                   <td>
+                                      <div class="span2">
+                                      <ul class="nav nav-list well playerSpace ">
+                                        <li class="nav-header playersTitle">Local Players</li>
+                                        <li ng-repeat="player in players" ng-bind="player">
+                                        </li>
+                                      </ul>
+                                  </div>
+                                  </td>
+                              </tr>
+                          </table>
+                                  
+                                <div class="chatMsgGame" >
+                                    
+                                    <div ng-repeat="msg in messages">
+                                        <div class="text-bold messageName" ng-bind="msg.name"> </div>
+                                        <div class="shadow messageSpace" ng-style="{'background-color': msg.color}" ng-bind="msg.text"></div>
+                                    </div>
+                                </div>  
+                                  
+                                    
+                                    
+                        
+                            <div class="row controls">    
+                              <form ng-submit="send()">
+                                <div class="span2">
+                        <!-- Technically I'm not using setName() in my app anymore, I changed the server side to be simple, I left it in... again sue away you litigation fiend... -->
+                                  <input type="text" class="input-block-level playerName" maxlength="15" ng-model="name" ng-change="setName()" placeholder="Your Name">
+                                </div>
+                                
+                                <div class="span2 balloonSettingsGame">
+                                   
+                                  <input type="color" class="span2" ng-model="color" name="favcolor" >
+                                </div>
+                                
+                                <div class="input-append span5">
+                        <!-- The ng-model attributes everywhere are what allow my inputs to communicate with the javascript "controller" code.  It is one of the main charms of Angular (soon to be replaced by something similar but different.-->
+                                  <input type="text" class="span4" ng-model="text" placeholder="Message">
+                        <!-- ng-disabled and ng-submit are angular built in functions that handle common situations.  This disabled will keep the button from being clickable while there is not any value for text.  The ng-submit at the start of the form is to prevent an actual page refresh and form submission action (try making a form with a submit button and clicking enter, your page will behave oddly.-->
+                        <!-- most of the classes you see are for Twitter Bootstrap, not even the latest (responsive) version.  Again I've taken much from the cloud9 startup code. -->
+                                  <input type="submit" class="span1 btn btn-success" value="Send" ng-disabled="!text">
+                                </div>
+                                
+                                
+                                
+                                
+                              </form>
+                              </div>
+                            </div>
+                     </div>
+                       
+                    
+                </td>
+                
+                <td width="60%">
+                    
+                    <div class="gameSpace">
+                      <canvas width="500" height="500" id="board" class="gameCanvas canvasSpace"></canvas>
+                      <!--  <canvas width="500" height="500" id="board" onclick="javascript: clickHandler(event);"></canvas> -->
+                        
+                    </div>
+                    
+                    <div class="gameControls">
+                          <div class="gameBt1"> <a class="btn btn-lg btn-primary btJoin disabled"> Join Game </a> 
+                                                <a class="btn btn-lg btn-primary bt1 disabled"> New Game </a> </div>
+                          <div class="gameBt2"> <a class="btn btn-lg btn-danger bt2 disabled"> Quit Game </a> </div>
+                          <div class="gameMessage"> <blink class="gameMessageBlink"> </blink> </div>
+                    </div>
+                    
+                    
+                </td>
+                
+            </tr>
+        </table>
+        
+        
+        <div class="gameScores">
+          
+              <div class="playerSymbol ps1"> <b> <font color=red size=5> X </font> </b> </div>
+              
+              <div class="Player1">
+                
+                <div class="Player1Name playerName" ng-bind="playersScore[0].name" >  </div>
+                <div class="playerScores Player1Score" ng-bind="playersScore[0].score">  </div>
+              </div>
+              
+              <div class="playerSymbol ps2"> <b> <font color=blue size=5> O </font> </b> </div>
+            
+              <div class="Player2">
+                <div class="Player2Name playerName" ng-bind="playersScore[1].name">   </div>
+                <div class="playerScores Player2Score" ng-bind="playersScore[1].score">  </div>
+              </div>
+                        
+        </div>
+        
+        <div class="scoresControl"> <a class="btn btn-lg btZeroScores disabled"> Reset my scores </a>   </div>
+        
+        <div class="gameWinner"> </div>
+        
+        
+         
+      </div>
+</div>

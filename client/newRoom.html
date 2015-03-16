@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="page-header">
+    <h1>New Room</h1>
+  </div>
+  <div class="row">
+    
+    <div class="row controls">
+
+      <form ng-submit="create()">
+        
+        <div class="input-append span9">
+
+          <input type="text" class="input-block-level" ng-model="newTopic" placeholder="New topic">
+          <input type="submit" class="span2 btn btn-primary" value="Create" ng-disabled="!newTopic">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

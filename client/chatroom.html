@@ -1,0 +1,54 @@
+<div class="container" >
+  <div class="pheader">
+<!-- roomTopic probably isn't the best name for the topic / room -->
+    <h1>{{roomTopic}}</h1>
+  </div>
+  <div class="row">
+      <div class="span3">
+          <ul class="nav nav-list well">
+            <li class="nav-header">Local Users</li>
+            <li ng-repeat="user in roster" ng-bind="user">
+            </li>
+          </ul>
+        </div>
+        <img src="../img/smiley.jpg" width="10%" height="10%">
+    
+        <div class="chatMsg" >
+          
+          <div ng-repeat="msg in messages">
+              <div class="text-bold" ng-bind="msg.name"> </div>
+              <div class="shadow messageSpace" ng-style="{'background-color': msg.color}" ng-bind="msg.text"></div>
+          </div>
+          
+        </div>
+        
+        
+    
+    <div class="row controls">
+<!-- Forms are another old school hack converted into something modern.  Pre javascript forms were the main way to get 
+data from the HTML to the server-side script.  They are set up so that someone clicking submit, or hitting enter would take 
+the data and send it using a POST to some "action" URL (normally a PHP script).  
+Nowadays we catch the action and don't send any data.  The reason you see them pop up on pages is because it's a fast way to let pressing enter do an action.  Otherwise you are listening for keypresses and deciding which key was pressed.  -->
+      <form ng-submit="send()">
+        <div class="span2">
+<!-- Technically I'm not using setName() in my app anymore, I changed the server side to be simple, I left it in... again sue away you litigation fiend... -->
+          <input type="text" class="input-block-level" maxlength="34" ng-model="name" ng-change="setName()" placeholder="Your Name">
+        </div>
+        <div class="input-append span9">
+<!-- The ng-model attributes everywhere are what allow my inputs to communicate with the javascript "controller" code.  It is one of the main charms of Angular (soon to be replaced by something similar but different.-->
+          <input type="text" class="span7" ng-model="text" placeholder="Message">
+<!-- ng-disabled and ng-submit are angular built in functions that handle common situations.  This disabled will keep the button from being clickable while there is not any value for text.  The ng-submit at the start of the form is to prevent an actual page refresh and form submission action (try making a form with a submit button and clicking enter, your page will behave oddly.-->
+<!-- most of the classes you see are for Twitter Bootstrap, not even the latest (responsive) version.  Again I've taken much from the cloud9 startup code. -->
+          <input type="submit" class="span2 btn btn-primary" value="Send" ng-disabled="!text">
+        </div>
+        
+        <br>
+        <div class="span2 balloonSettings">
+           Balloon color
+          <input type="color" class="span2" ng-model="color" name="favcolor" >
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
