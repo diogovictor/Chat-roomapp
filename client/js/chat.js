@@ -541,25 +541,11 @@ theapp.controller("NewGameRoomController", ["$scope",
 //Also I'll clear the text so you can chat like you expect to chat.
         };
 
-//leftover code from previous version, the server gets a "identify" event with my current name, this helps 
-//if you want everyone to get a list of current users (for instance knowing who is still in the room might be a nice feature)
+
         $scope.setName = function setName() {
           socket.emit('identify', $scope.name, $scope.gameTopic);
         };
         
-        /*
-        $scope.joinGame = function joinGame(){
-          console.log("Trying to become a player...", $scope.name);
-          socket.emit("tryToBecomePlayer", {gameRoom: $scope.gameTopic, clientName: $scope.name});
-        };
-        */
-    /*
-     $("#btJoinGame").click(function(){
-        console.log("Trying to become a player...", $scope.name);
-        alert("Trying to become a player!");
-        socket.emit("tryToBecomePlayer", {gameRoom: $scope.gameTopic, clientName: $scope.name});
-     });
-       */
         
   }]);
   
@@ -653,31 +639,8 @@ function paintBoard() {
 
    context.stroke();
    context.closePath();
-  
-  /*
-   if (begin) {
-      var ini = Math.abs(Math.floor(Math.random() * 9 - 0.1));
-      markBit(1 << ini, 'O');
-      begin = false;
-   } else {
-      begin = true;
-   }   
-   */
 }
 
-function checkWinner(board) {
-
-   var result = false;
-
-   if (((board | 0x1C0) == board) || ((board | 0x38 ) == board) || 
-	((board | 0x7) == board) || ((board | 0x124) == board) || 
-	((board | 0x92) == board) || ((board | 0x49) == board) || 
-	((board | 0x111) == board) || ((board | 0x54) == board)) {  
-
-	result = true;
-   } 
-   return result;
-}
 
 function paintX(x, y) {
 
@@ -727,46 +690,7 @@ function paintO(x, y) {
    context.closePath();
 }
 
-function clickHandler(e) {
 
-    var y = Math.floor(e.clientY / (height / 3));    
-    var x =  Math.floor(e.clientX / (width/ 3)); 
-
-    var bit =  (1 << x + ( y * 3 ));
-
-    if (isEmpty(xBoard, oBoard, bit)) {
-
-	markBit(bit, 'X')
-
-        if (!checkNobody())  {
-		if (checkWinner(xBoard)) {
-
-		    alert('You win!!');
-		    restart();
-
-		} else {
-		
-	     	   play();
-		   if (!checkNobody()) {
-		     
-		       if (checkWinner(oBoard)) {
-			   alert('Loser!!');
-			   restart();
-		        }
-		    }
-	 	}
-	   }	
-     }
-}
-
-function checkNobody(){
-   if ((xBoard | oBoard) == 0x1FF) {	 
-       alert('Nobody won!!');
-       restart();
-       return true;
-   }
-   return false;
-}
 
 function restart() {
    context.clearRect (0, 0, width , height);
@@ -775,110 +699,9 @@ function restart() {
    //paintBoard();
 }
 
-function isEmpty(xBoard, oBoard, bit) {
-   return (((xBoard & bit) == 0) && ((oBoard & bit) == 0));
-}
 
-function simulate(oBoard, xBoard) {
 
-   var ratio = 0;
- 
-   var bit = 0;
-   for (var i= 0; i < 9; i++) {
 
-        var cBit = 1 << i;
 
-	if (isEmpty(xBoard, oBoard, cBit)) {
-
-           if (checkWinner(oBoard | cBit)) {
-	      bit = cBit;
-              break;
-	   } else if (checkWinner(xBoard | cBit)) {
-	      bit = cBit;
-	   } 
-	}
-   }
-   
-   if (bit == 0) {
-      for (var i= 0; i < 9; i++) {
-	  var cBit = 1 << i;
-
-	  if (isEmpty(xBoard, oBoard, cBit)) {
-	      var result = think(oBoard, xBoard, 'X', 0, 1)
-	      if (ratio == 0 || ratio < result) {
-	         ratio = result;
-	         bit = cBit;
-	      }
-	   }
-       }
-   }	
-   return bit;
-}
-
-function think(oBoard, xBoard, player, bit, ratio) {
-
-   if (player == 'O') {
-	oBoard = oBoard | bit;
-   } else {
-	xBoard = xBoard | bit;
-   }
-
-   if (checkWinner(oBoard)) {
-      ratio *= 1.1; 
-      return ratio;
-
-   } else if (checkWinner(xBoard)) { 
-      
-      ratio *= 0.7; 
-      return ratio;
-
-   } else {
-	var best = 0;
-	ratio *= 0.6; 
-
-	for (var i= 0; i < 9; i++) {
-		
-	   if (isEmpty(xBoard, oBoard, 1 << i)) {
-
-               var newRatio = think(oBoard, xBoard, player == 'O' ? 'X' : 'O', 1 << i, ratio);
-
-               if (best == 0 || best < newRatio) {
-		               best = newRatio;
-               }
-	  }
- 	}
-
-	return best;
-   }
-}
-
-function markBit(markBit, player) {
-   
-   var bit = 1;
-   var posX = 0, posY = 0;
-   
-   while ((markBit & bit) == 0) {
-	bit = bit << 1;
-        posX++;
-	if (posX > 2) {
-            posX = 0;
-            posY++;
-        }
-   }
-   
-    if (player == 'O') { 
-        oBoard = oBoard | bit;
-	paintO(posX, posY);
-    } else {
-        xBoard = xBoard | bit;
-	paintX(posX, posY);
-    }
-}
-
-function play() {  
-   var bestBit = simulate(oBoard, xBoard);
-   markBit(bestBit, 'O');
-   
-}
 
 //********************************************************************************************************
