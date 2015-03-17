@@ -24,7 +24,7 @@ it to have links within the same page (no page refresh) and the framework would 
           </div>
           
           <h4>Join a room, current topics are:</h4>
-          <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered tableRoom">
             <tr ng-repeat="room in rooms"><td><a href="/#room/{{ room }}">{{ room }}</a></td></tr>
           </table>
       </div>
@@ -37,7 +37,7 @@ it to have links within the same page (no page refresh) and the framework would 
           </div>
           
           <h4>Join a room, current games are:</h4>
-          <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered tableRoom">
             <tr ng-repeat="game in games"><td><a href="/#game/{{ game }}">{{ game }}</a></td></tr>
           </table>
         
@@ -45,3 +45,5 @@ it to have links within the same page (no page refresh) and the framework would 
       
       
     </div>
+    
+    <div class="footer"> Developed by Diogo Victor </div>
